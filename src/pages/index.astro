@@ -1,8 +1,116 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Profile from "../components/Profile.astro";
+import Section from "../components/Section.astro";
+import Skills from "../components/Skills.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Education from "../components/Education.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Mi CV — Sitio personal"
+  description="Sitio personal con mi currículum e información profesional."
+>
+  <main>
+    <Profile
+      name="Ada Lovelace"
+      role="Software Engineer"
+      tagline="Construyo interfaces de terminal hermosas y aplicaciones web. Apasionada por la tipografía, el minimalismo y el código limpio."
+      location="Buenos Aires, Argentina"
+      email="ada@example.com"
+      site="ada.example.com"
+    />
+
+    <Section title="Skills">
+      <Skills
+        skills={[
+          { name: "TypeScript", level: 90 },
+          { name: "Astro", level: 85 },
+          { name: "CSS / WebTUI", level: 80 },
+          { name: "Node.js", level: 75 },
+          { name: "React", level: 70 },
+          { name: "SQL", level: 65 },
+        ]}
+      />
+    </Section>
+
+    <Section title="Experiencia">
+      <Experience
+        jobs={[
+          {
+            company: "Acme Corp",
+            role: "Senior Frontend Engineer",
+            period: "2022 — Presente",
+            description:
+              "Lideré el rediseño del dashboard principal, mejorando el rendimiento y la accesibilidad. Mentoreé a desarrolladores juniors y establecí buenas prácticas de testing.",
+            tech: ["Astro", "TypeScript", "WebTUI", "Playwright"],
+          },
+          {
+            company: "Globex Inc",
+            role: "Frontend Developer",
+            period: "2019 — 2022",
+            description:
+              "Desarrollé componentes reutilizables y migré la base de código a un sistema de diseño propio.",
+            tech: ["React", "CSS", "Node.js"],
+          },
+          {
+            company: "Initech",
+            role: "Web Developer",
+            period: "2017 — 2019",
+            description:
+              "Mantuve y mejoré sitios web corporativos y tiendas en línea.",
+            tech: ["JavaScript", "HTML", "PHP"],
+          },
+        ]}
+      />
+    </Section>
+
+    <Section title="Proyectos">
+      <Projects
+        projects={[
+          {
+            name: "terminal-portfolio",
+            description:
+              "Un portafolio inspirado en terminales TUI construido con WebTUI. Exactamente lo que estás viendo.",
+            tech: ["Astro", "WebTUI", "CSS"],
+            link: "https://github.com/example/terminal-portfolio",
+          },
+          {
+            name: "dotfiles",
+            description:
+              "Configuración de mi entorno de desarrollo: neovim, tmux y zsh.",
+            tech: ["Lua", "Shell"],
+            link: "https://github.com/example/dotfiles",
+          },
+          {
+            name: "cli-utils",
+            description:
+              "Una colección de utilidades de línea de comandos en Node.js.",
+            tech: ["Node.js", "TypeScript"],
+          },
+        ]}
+      />
+    </Section>
+
+    <Section title="Educación">
+      <Education
+        items={[
+          {
+            degree: "Ingeniería en Sistemas",
+            institution: "Universidad Nacional",
+            period: "2013 — 2018",
+          },
+          {
+            degree: "Bootcamp de Desarrollo Web",
+            institution: "Academy",
+            period: "2017",
+          },
+        ]}
+      />
+    </Section>
+
+    <Footer />
+  </main>
 </Layout>

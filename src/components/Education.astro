@@ -1,0 +1,43 @@
+---
+// Educación representada con una tabla estilo terminal.
+interface Education {
+  degree: string;
+  institution: string;
+  period: string;
+}
+
+interface Props {
+  items: Education[];
+}
+
+const { items } = Astro.props;
+---
+
+<table divide-="horizontal">
+  <thead>
+    <tr>
+      <th>Grado</th>
+      <th>Institución</th>
+      <th>Periodo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      items.map((item) => (
+        <tr>
+          <td>
+            <strong>{item.degree}</strong>
+          </td>
+          <td>{item.institution}</td>
+          <td class="period">{item.period}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+<style>
+  .period {
+    color: var(--foreground2);
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+// Sección con título y contenido, usando un box estilo terminal.
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section>
+  <h2>
+    <span is-="badge" variant-="background1">▸</span>
+    {title}
+  </h2>
+  <div box-="square">
+    <slot />
+  </div>
+</section>
+
+<style>
+  section {
+    margin-bottom: 3lh;
+  }
+
+  h2 {
+    margin-bottom: 1lh;
+  }
+</style>

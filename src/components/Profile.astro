@@ -1,0 +1,46 @@
+---
+// Componente de perfil: nombre, cargo y contacto.
+interface Props {
+  name: string;
+  role: string;
+  tagline: string;
+  location: string;
+  email: string;
+  site: string;
+}
+
+const { name, role, tagline, location, email, site } = Astro.props;
+---
+
+<div box-="double" is-="typography-block">
+  <header>
+    <h1>{name}</h1>
+    <span is-="badge" variant-="foreground1" cap-="round">{role}</span>
+  </header>
+
+  <p>{tagline}</p>
+
+  <ul marker-="bullet">
+    <li>📍 {location}</li>
+    <li>✉️ <a href={`mailto:${email}`}>{email}</a></li>
+    <li>🌐 <a href={`https://${site}`} target="_blank">{site}</a></li>
+  </ul>
+</div>
+
+<style>
+  header {
+    display: flex;
+    align-items: center;
+    gap: 2ch;
+    flex-wrap: wrap;
+    margin-bottom: 1lh;
+  }
+
+  h1 {
+    display: inline;
+  }
+
+  p {
+    margin-bottom: 1lh;
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+// Lista de experiencia laboral usando acordeones estilo terminal.
+interface Job {
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  tech: string[];
+}
+
+interface Props {
+  jobs: Job[];
+}
+
+const { jobs } = Astro.props;
+---
+
+<div class="jobs">
+  {
+    jobs.map((job) => (
+      <details is-="accordion" class="job">
+        <summary>
+          <strong>{job.role}</strong>
+          <span class="muted"> @ {job.company}</span>
+          <span class="period">{job.period}</span>
+        </summary>
+        <p>{job.description}</p>
+        <ul marker-="bullet">
+          {job.tech.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ul>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .jobs {
+    display: grid;
+    gap: 1lh;
+  }
+
+  .job summary {
+    cursor: pointer;
+  }
+
+  .muted {
+    color: var(--foreground1);
+  }
+
+  .period {
+    color: var(--foreground2);
+    float: right;
+  }
+</style>

@@ -1,46 +1,55 @@
-# Astro Starter Kit: Basics
+# amarrete
 
-```sh
-npm create astro@latest -- --template basics
-```
+Sitio personal tipo CV construido con [Astro](https://astro.build) y [WebTUI](https://webtui.ironclad.sh), una librería CSS modular que trae la estética de las terminales TUI al navegador.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Comandos
 
-## 🚀 Project Structure
+Todos los comandos se ejecutan desde la raíz del proyecto, en una terminal:
 
-Inside of your Astro project, you'll see the following folders and files:
+| Comando             | Acción                                               |
+| :------------------ | :--------------------------------------------------- |
+| `npm install`       | Instala las dependencias                             |
+| `npm run dev`       | Inicia el servidor de desarrollo en `localhost:4321` |
+| `npm run build`     | Compila el sitio de producción en `./dist/`          |
+| `npm run preview`   | Previsualiza la build localmente                     |
+| `npm run astro ...` | Ejecuta comandos de la CLI de Astro                  |
+| `npm run deploy`    | Publica el sitio en Cloudflare Pages (Wrangler)      |
+
+## 🧩 Estructura del proyecto
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+│   └── favicon.ico
+└── src/
+    ├── components/          # Componentes reutilizables
+    │   ├── Profile.astro
+    │   ├── Section.astro
+    │   ├── Skills.astro
+    │   ├── Experience.astro
+    │   ├── Projects.astro
+    │   ├── Education.astro
+    │   └── Footer.astro
+    ├── layouts/
+    │   └── Layout.astro     # Carga WebTUI y el tema Catppuccin
+    └── pages/
+        └── index.astro      # Página principal (CV)
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## ✏️ Personalizar el contenido
 
-## 🧞 Commands
+Los datos del CV (nombre, experiencia, skills, proyectos, educación) son de ejemplo y viven en [`src/pages/index.astro`](./src/pages/index.astro). Edítalos con tu información real.
 
-All commands are run from the root of the project, from a terminal:
+### Cambiar el tema
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+El tema Catppuccin se define en [`src/layouts/Layout.astro`](./src/layouts/Layout.astro) mediante el atributo `data-webtui-theme`. Variantes disponibles:
 
-## 👀 Want to learn more?
+- `catppuccin-mocha` (oscuro, por defecto)
+- `catppuccin-macchiato` (oscuro)
+- `catppuccin-frappe` (oscuro claro)
+- `catppuccin-latte` (claro)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📚 Documentación
+
+- [Documentación de Astro](https://docs.astro.build)
+- [Documentación de WebTUI](https://webtui.ironclad.sh)

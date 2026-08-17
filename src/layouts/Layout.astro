@@ -1,22 +1,64 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Mi CV — Sitio personal",
+  description = "Sitio personal con mi currículum e información profesional.",
+} = Astro.props;
+---
+
 <!doctype html>
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Amarrete</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es" data-webtui-theme="catppuccin-mocha">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  @layer base, utils, components;
+
+  @import "@webtui/css/base.css";
+
+  /* Utilities */
+  @import "@webtui/css/utils/box.css";
+
+  /* Components */
+  @import "@webtui/css/components/typography.css";
+  @import "@webtui/css/components/button.css";
+  @import "@webtui/css/components/badge.css";
+  @import "@webtui/css/components/separator.css";
+  @import "@webtui/css/components/progress.css";
+  @import "@webtui/css/components/accordion.css";
+  @import "@webtui/css/components/table.css";
+  @import "@webtui/css/components/pre.css";
+  @import "@webtui/css/components/mark.css";
+
+  /* Theme */
+  @import "@webtui/theme-catppuccin";
+</style>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  body {
+    padding: 2lh 3ch;
+    max-width: 110ch;
+    margin: 0 auto;
+  }
 </style>

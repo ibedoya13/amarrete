@@ -1,0 +1,48 @@
+---
+// Lista de habilidades con barras de progreso estilo terminal.
+interface Skill {
+  name: string;
+  /** Nivel de 0 a 100 */
+  level: number;
+}
+
+interface Props {
+  skills: Skill[];
+}
+
+const { skills } = Astro.props;
+---
+
+<ul>
+  {
+    skills.map((skill) => (
+      <li>
+        <span class="skill-name">{skill.name}</span>
+        <span
+          is-="progress"
+          style={`--progress-value: ${skill.level}; --progress-value-background: var(--foreground0);`}
+          aria-label={`${skill.name}: ${skill.level}%`}
+        />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  ul {
+    display: grid;
+    gap: 1lh;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 20ch 1fr;
+    align-items: center;
+    gap: 2ch;
+  }
+
+  .skill-name {
+    color: var(--foreground0);
+    font-weight: var(--font-weight-bold);
+  }
+</style>
