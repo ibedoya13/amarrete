@@ -1,4 +1,6 @@
 ---
+import "../styles/editor.css";
+
 interface Props {
   title?: string;
   description?: string;
@@ -17,8 +19,23 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+    />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <script is:inline>
+      // Aplicar el tema guardado antes de pintar (evita parpadeo entre temas).
+      try {
+        var saved = localStorage.getItem("webtui-theme");
+        if (saved === "catppuccin-mocha" || saved === "catppuccin-latte") {
+          document.documentElement.dataset.webtuiTheme = saved;
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <slot />
@@ -46,19 +63,4 @@ const {
 
   /* Theme */
   @import "@webtui/theme-catppuccin";
-</style>
-
-<style is:global>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    min-height: 100%;
-  }
-
-  body {
-    padding: 2lh 3ch;
-    max-width: 110ch;
-    margin: 0 auto;
-  }
 </style>

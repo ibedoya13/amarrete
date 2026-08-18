@@ -23,22 +23,28 @@ Todos los comandos se ejecutan desde la raíz del proyecto, en una terminal:
 │   └── favicon.ico
 └── src/
     ├── components/          # Componentes reutilizables
-    │   ├── Profile.astro
-    │   ├── Section.astro
-    │   ├── Skills.astro
-    │   ├── Experience.astro
-    │   ├── Projects.astro
-    │   ├── Education.astro
-    │   └── Footer.astro
+    │   ├── CodePanel.astro  # Panel de "archivo" abierto (código con números de línea)
+    │   ├── Explorer.astro   # Barra lateral con las secciones como archivos
+    │   └── StatusBar.astro  # Barra de estado inferior del editor
     ├── layouts/
     │   └── Layout.astro     # Carga WebTUI y el tema Catppuccin
-    └── pages/
-        └── index.astro      # Página principal (CV)
+    ├── pages/
+    │   └── index.astro      # Página principal (CV como editor de código)
+    └── styles/
+        └── editor.css       # Estilos del editor (shell, código, tokens de sintaxis)
 ```
+
+La página única se comporta como una SPA: la barra lateral (derecha) lista las
+secciones como archivos (`sobre-mi.ts`, `experiencia.ts`, …) y, al hacer clic, se
+abren en el editor central como código con resaltado de sintaxis. La barra de
+estado inferior hace de footer. La navegación usa hash (`#sobre-mi.ts`) y
+transiciones de vista.
 
 ## ✏️ Personalizar el contenido
 
-Los datos del CV (nombre, experiencia, skills, proyectos, educación) son de ejemplo y viven en [`src/pages/index.astro`](./src/pages/index.astro). Edítalos con tu información real.
+Los datos del CV (perfil, experiencia, habilidades, proyectos y contacto) son de
+ejemplo y viven en el frontmatter de
+[`src/pages/index.astro`](./src/pages/index.astro). Edítalos con tu información real.
 
 ### Cambiar el tema
 

@@ -1,0 +1,18 @@
+---
+// Panel de "archivo" abierto en el editor: muestra el contenido como código.
+// `lines` es una lista de fragmentos HTML ya resaltados (uno por línea).
+interface Props {
+  file: string;
+  language: string;
+  lines: string[];
+  active?: boolean;
+}
+
+const { file, language, lines, active = false } = Astro.props;
+---
+
+<article class="panel" data-panel={file} data-language={language} hidden={!active}>
+  <div class="code">
+    {lines.map((line) => <div class="line" set:html={line} />)}
+  </div>
+</article>

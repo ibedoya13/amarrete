@@ -1,116 +1,400 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Profile from "../components/Profile.astro";
-import Section from "../components/Section.astro";
-import Skills from "../components/Skills.astro";
-import Experience from "../components/Experience.astro";
-import Projects from "../components/Projects.astro";
-import Education from "../components/Education.astro";
-import Footer from "../components/Footer.astro";
+import Explorer from "../components/Explorer.astro";
+import StatusBar from "../components/StatusBar.astro";
+import CodePanel from "../components/CodePanel.astro";
+
+const perfil = {
+  nombre: "Luis Bedoya",
+  rol: "Ingeniero de Software",
+  tagline:
+    "Me gusta construir soluciones eficientes, y solucionar problemas de la manera más simple posible.",
+  ubicacion: "Ciudad de Panamá, Panamá",
+  educacion: [
+    {
+      titulo: "Ingeniería en Sistemas con Énfasis en Desarrollo de Software",
+      institucion: "Universidad Interamericana de Panamá",
+      periodo: "2014 — 2017 (DNF)",
+    },
+  ],
+};
+
+const experiencia = [
+  {
+    empresa: "Banistmo",
+    rol: "Ingeniero de software",
+    periodo: "dic. 2022 - actualidad",
+    descripcion: "Encargado del soporte y evolución de aplicaciones internas y públicas.",
+    stack: ["Nube de AWS", "TypeScript", "Node.js", "Python", "Angular", "React"],
+  },
+  {
+    empresa: "HyperNova Labs",
+    rol: "Desarrollador web full-stack",
+    periodo: "oct. 2019 - nov. 2022",
+    descripcion:
+      "Desarrollador outsourcing en proyectos de servicios de información y clientes en Banistmo S.A.",
+    stack: ["Angular", "Node.js", "Java"],
+  },
+  {
+    empresa: "Rootstack",
+    rol: "Desarrollador web full-stack",
+    periodo: "may. 2019 - oct. 2019",
+    descripcion: "Desarrollador in situ trabajando con clientes locales de la compañía.",
+    stack: ["PHP", "Laravel", "Drupal"],
+  },
+  {
+    empresa: "HyperNova Labs",
+    rol: "Desarrollador web front-end",
+    periodo: "jul. 2018 - may. 2019",
+    descripcion:
+      "Desarrollador outsourcing en proyectos de transformación digital en Banesco (Panamá), S.A.",
+    stack: ["TypeScript", "Angular", "Sass"],
+  },
+];
+
+const habilidades = [
+  "Proyectos construidos en la nube con diferentes proveedores, empleando arquitecturas serverless.",
+  "Buenas prácticas de DevOps en el ciclo de vida del software.",
+  "Trabajo con varios lenguajes y tecnologías, participando desde el diseño hasta la implementación y mantenimiento.",
+  "Diseño de las soluciones de arquitectura de las aplicaciones.",
+];
+
+const proyectos = [
+  {
+    nombre: "amarrete",
+    descripcion:
+      "Mi CV e información personal, inspirado en TUIs y editores de texto. Exactamente lo que estás viendo.",
+    stack: ["Astro", "WebTUI", "CSS"],
+    url: "https://personal.amarrete.com",
+  },
+];
+
+const contacto = {
+  email: "luisbedoya13@gmail.com",
+  sitio: "personal.amarrete.com",
+  ubicacion: "Ciudad de Panamá, Panamá",
+  redes: {
+    github: "https://github.com/ibedoya13",
+    linkedin: "https://www.linkedin.com/in/luis-david-bedoya-restrepo-baa998167/",
+  },
+};
+
+const hobbies = [
+  { nombre: "Categorías de automovilismo", descripcion: "La Fórmula 1, el WEC y la IndyCar." },
+  {
+    nombre: "Videojuegos",
+    descripcion:
+      "Me gustan los juegos de rol, FPS y carreras. Pueden encontrarme en eFootball como 'Amarrete'.",
+  },
+  {
+    nombre: "Cine y películas",
+    descripcion: "Soy muy selectivo con las películas que voy a ver al cine.",
+  },
+  {
+    nombre: "Salir a comer",
+    descripcion: "Me gusta comprar ofertas y probar nuevos restaurantes.",
+  },
+  {
+    nombre: "Anime y Manga",
+    descripcion:
+      "Suelo seguir entre tres y cuatro animes por temporada, y me gusta leer mangas semanalmente.",
+  },
+];
+
+// ── Contenido de cada "archivo" como texto plano (con indentación real) ──
+
+const sobreMiSrc = [
+  "// sobre-mi.ts",
+  "// Perfil personal y formación académica.",
+  "",
+  "export const about = {",
+  `  nombre: "${perfil.nombre}",`,
+  `  rol: "${perfil.rol}",`,
+  `  tagline: "${perfil.tagline}",`,
+  `  ubicacion: "${perfil.ubicacion}",`,
+  "  educacion: [",
+  ...perfil.educacion.flatMap((e) => [
+    "    {",
+    `      titulo: "${e.titulo}",`,
+    `      institucion: "${e.institucion}",`,
+    `      periodo: "${e.periodo}",`,
+    "    },",
+  ]),
+  "  ],",
+  "};",
+];
+
+const experienciaSrc = [
+  "// experiencia.ts",
+  "",
+  "export interface jobPosition {",
+  "  empresa: string;",
+  "  rol: string;",
+  "  periodo: string;",
+  "  descripcion: string;",
+  "  stack: string[];",
+  "}",
+  "",
+  "export const experience: jobPosition[] = [",
+  ...experiencia.flatMap((j) => [
+    "  {",
+    `    empresa: "${j.empresa}",`,
+    `    rol: "${j.rol}",`,
+    `    periodo: "${j.periodo}",`,
+    `    descripcion: "${j.descripcion}",`,
+    `    stack: [${j.stack.map((t) => `"${t}"`).join(", ")}],`,
+    "  },",
+  ]),
+  "];",
+];
+
+const habilidadesSrc = [
+  "// habilidades.ts",
+  "// Resumen de habilidades.",
+  "",
+  "export const skills = [",
+  ...habilidades.map((h) => `  "${h}",`),
+  "];",
+];
+
+const hobbiesSrc = [
+  "// hobbies.ts",
+  "// Hobbies e intereses.",
+  "",
+  "export const hobbies = [",
+  ...hobbies.flatMap((h) => [
+    "  {",
+    `    nombre: "${h.nombre}",`,
+    `    descripcion: "${h.descripcion}",`,
+    "  },",
+  ]),
+  "];",
+];
+
+const proyectosSrc = [
+  "// proyectos.ts",
+  "",
+  "export const projects = [",
+  ...proyectos.flatMap((p) => [
+    "  {",
+    `    nombre: "${p.nombre}",`,
+    `    descripcion: "${p.descripcion}",`,
+    `    stack: [${p.stack.map((t) => `"${t}"`).join(", ")}],`,
+    ...(p.url ? [`    url: "${p.url}",`] : []),
+    "  },",
+  ]),
+  "];",
+];
+
+const contactoSrc = [
+  "// contacto.ts",
+  "",
+  "export const contacto = {",
+  `  email: "${contacto.email}",`,
+  `  sitio: "${contacto.sitio}",`,
+  `  ubicacion: "${contacto.ubicacion}",`,
+  "  redes: {",
+  `    github: "${contacto.redes.github}",`,
+  `    linkedin: "${contacto.redes.linkedin}",`,
+  "  },",
+  "};",
+];
+
+// ── Mini resaltador de sintaxis (TS-like) ──
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function highlightLine(line: string): string {
+  const re =
+    /(\/\/.*$)|("(?:[^"\n]*)")|(\b\d+\b)|(\b(?:export|const|interface|type)\b)|(\b(?:string|number|boolean|Puesto)\b(?:\[\])?)|([A-Za-z_$][\w$]*)(?=\s*:)|([{}[\]();,:=])/g;
+  const cls = [null, "tk-com", "tk-str", "tk-num", "tk-kw", "tk-type", "tk-key", "tk-pn"];
+  let out = "";
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(line))) {
+    out += escapeHtml(line.slice(last, m.index));
+    const g = m.slice(1).findIndex((x) => x !== undefined) + 1;
+    out += `<span class="${cls[g]}">${escapeHtml(m[0])}</span>`;
+    last = m.index + m[0].length;
+  }
+  out += escapeHtml(line.slice(last));
+  return out;
+}
+
+const archivos = [
+  "sobre-mi.ts",
+  "experiencia.ts",
+  "habilidades.ts",
+  "hobbies.ts",
+  "proyectos.ts",
+  "contacto.ts",
+];
+
+const activo = "sobre-mi.ts";
 ---
 
 <Layout
   title="Mi CV — Sitio personal"
   description="Sitio personal con mi currículum e información profesional."
 >
-  <main>
-    <Profile
-      name="Ada Lovelace"
-      role="Software Engineer"
-      tagline="Construyo interfaces de terminal hermosas y aplicaciones web. Apasionada por la tipografía, el minimalismo y el código limpio."
-      location="Buenos Aires, Argentina"
-      email="ada@example.com"
-      site="ada.example.com"
-    />
+  <div class="editor">
+    <header class="titlebar">
+      <div class="titlebar__left">
+        <div class="titlebar__dots" aria-hidden="true">
+          <span class="titlebar__dot titlebar__dot--red"></span>
+          <span class="titlebar__dot titlebar__dot--yellow"></span>
+          <span class="titlebar__dot titlebar__dot--green"></span>
+        </div>
+        <span class="titlebar__repo">amarrete</span>
+      </div>
+      <div class="titlebar__file" data-status-file>{activo}</div>
+      <div class="titlebar__right">
+        <button
+          class="titlebar__repo theme-toggle"
+          data-theme-toggle
+          type="button"
+          aria-label="Cambiar entre tema oscuro y claro"
+        >
+          <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+          <span data-theme-label>Catppuccin Mocha</span>
+        </button>
+      </div>
+    </header>
 
-    <Section title="Skills">
-      <Skills
-        skills={[
-          { name: "TypeScript", level: 90 },
-          { name: "Astro", level: 85 },
-          { name: "CSS / WebTUI", level: 80 },
-          { name: "Node.js", level: 75 },
-          { name: "React", level: 70 },
-          { name: "SQL", level: 65 },
-        ]}
-      />
-    </Section>
+    <div class="tabbar">
+      <div class="tab is-active">
+        <span class="tab__dot" aria-hidden="true">●</span>
+        <span data-status-file>{activo}</span>
+      </div>
+    </div>
 
-    <Section title="Experiencia">
-      <Experience
-        jobs={[
-          {
-            company: "Acme Corp",
-            role: "Senior Frontend Engineer",
-            period: "2022 — Presente",
-            description:
-              "Lideré el rediseño del dashboard principal, mejorando el rendimiento y la accesibilidad. Mentoreé a desarrolladores juniors y establecí buenas prácticas de testing.",
-            tech: ["Astro", "TypeScript", "WebTUI", "Playwright"],
-          },
-          {
-            company: "Globex Inc",
-            role: "Frontend Developer",
-            period: "2019 — 2022",
-            description:
-              "Desarrollé componentes reutilizables y migré la base de código a un sistema de diseño propio.",
-            tech: ["React", "CSS", "Node.js"],
-          },
-          {
-            company: "Initech",
-            role: "Web Developer",
-            period: "2017 — 2019",
-            description:
-              "Mantuve y mejoré sitios web corporativos y tiendas en línea.",
-            tech: ["JavaScript", "HTML", "PHP"],
-          },
-        ]}
-      />
-    </Section>
+    <div class="editor__main">
+      <main class="editor__content">
+        <div class="breadcrumb">
+          <span>amarrete</span><span class="crumb-sep">›</span><span>src</span><span
+            class="crumb-sep">›</span
+          ><span class="crumb-file" data-status-file>{activo}</span>
+        </div>
 
-    <Section title="Proyectos">
-      <Projects
-        projects={[
-          {
-            name: "terminal-portfolio",
-            description:
-              "Un portafolio inspirado en terminales TUI construido con WebTUI. Exactamente lo que estás viendo.",
-            tech: ["Astro", "WebTUI", "CSS"],
-            link: "https://github.com/example/terminal-portfolio",
-          },
-          {
-            name: "dotfiles",
-            description:
-              "Configuración de mi entorno de desarrollo: neovim, tmux y zsh.",
-            tech: ["Lua", "Shell"],
-            link: "https://github.com/example/dotfiles",
-          },
-          {
-            name: "cli-utils",
-            description:
-              "Una colección de utilidades de línea de comandos en Node.js.",
-            tech: ["Node.js", "TypeScript"],
-          },
-        ]}
-      />
-    </Section>
+        <CodePanel
+          file="sobre-mi.ts"
+          language="TypeScript"
+          lines={sobreMiSrc.map(highlightLine)}
+          active
+        />
+        <CodePanel
+          file="experiencia.ts"
+          language="TypeScript"
+          lines={experienciaSrc.map(highlightLine)}
+        />
+        <CodePanel
+          file="habilidades.ts"
+          language="TypeScript"
+          lines={habilidadesSrc.map(highlightLine)}
+        />
+        <CodePanel file="hobbies.ts" language="TypeScript" lines={hobbiesSrc.map(highlightLine)} />
+        <CodePanel
+          file="proyectos.ts"
+          language="TypeScript"
+          lines={proyectosSrc.map(highlightLine)}
+        />
+        <CodePanel
+          file="contacto.ts"
+          language="TypeScript"
+          lines={contactoSrc.map(highlightLine)}
+        />
+      </main>
 
-    <Section title="Educación">
-      <Education
-        items={[
-          {
-            degree: "Ingeniería en Sistemas",
-            institution: "Universidad Nacional",
-            period: "2013 — 2018",
-          },
-          {
-            degree: "Bootcamp de Desarrollo Web",
-            institution: "Academy",
-            period: "2017",
-          },
-        ]}
-      />
-    </Section>
+      <Explorer files={archivos} active={activo} />
+    </div>
 
-    <Footer />
-  </main>
+    <StatusBar />
+  </div>
 </Layout>
+
+<script>
+  const panels = Array.from(document.querySelectorAll("[data-panel]"));
+  const items = Array.from(document.querySelectorAll("[data-file]"));
+  const fileEls = document.querySelectorAll("[data-status-file]");
+  const langEls = document.querySelectorAll("[data-status-lang]");
+  const linesEl = document.querySelector("[data-status-lines]");
+  const DEFAULT = "sobre-mi.ts";
+
+  function getFile() {
+    const hash = decodeURIComponent(location.hash.slice(1));
+    return items.some((i) => i.dataset.file === hash) ? hash : DEFAULT;
+  }
+
+  let current = null;
+
+  function activate(file) {
+    const panel = panels.find((p) => p.dataset.panel === file);
+    if (!panel || file === current) return;
+
+    const prev = current;
+    current = file;
+
+    const swap = () => {
+      panels.forEach((p) => (p.hidden = p !== panel));
+      items.forEach((i) => i.classList.toggle("is-active", i.dataset.file === file));
+      fileEls.forEach((el) => (el.textContent = file));
+      langEls.forEach((el) => (el.textContent = panel.dataset.language ?? ""));
+      if (linesEl) linesEl.textContent = String(panel.querySelectorAll(".line").length);
+    };
+
+    if (prev !== null && document.startViewTransition) {
+      document.startViewTransition(swap);
+    } else {
+      swap();
+    }
+  }
+
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      location.hash = item.dataset.file;
+    });
+  });
+
+  window.addEventListener("hashchange", () => activate(getFile()));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+    const idx = items.findIndex((i) => i.classList.contains("is-active"));
+    const delta = e.key === "ArrowDown" ? 1 : -1;
+    const next = items[(idx + delta + items.length) % items.length];
+    location.hash = next.dataset.file;
+    e.preventDefault();
+  });
+
+  activate(getFile());
+
+  // ── Toggle de tema (Catppuccin Mocha ⇄ Latte) ──
+  const THEME_KEY = "webtui-theme";
+  const MOCHA = "catppuccin-mocha";
+  const LATTE = "catppuccin-latte";
+  const THEME_LABELS = { [MOCHA]: "Catppuccin Mocha", [LATTE]: "Catppuccin Latte" };
+
+  const themeToggle = document.querySelector("[data-theme-toggle]");
+  const themeLabel = document.querySelector("[data-theme-label]");
+
+  function currentTheme() {
+    return document.documentElement.dataset.webtuiTheme === LATTE ? LATTE : MOCHA;
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.dataset.webtuiTheme = theme;
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch (e) {}
+    if (themeLabel) themeLabel.textContent = THEME_LABELS[theme];
+  }
+
+  // Sincroniza la etiqueta con el tema (el script inline del <head> ya lo aplicó).
+  applyTheme(currentTheme());
+
+  themeToggle?.addEventListener("click", () => {
+    applyTheme(currentTheme() === MOCHA ? LATTE : MOCHA);
+  });
+</script>

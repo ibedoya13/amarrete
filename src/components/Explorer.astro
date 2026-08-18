@@ -1,0 +1,29 @@
+---
+// Barra lateral (explorador de archivos) con las secciones como archivos.
+interface Props {
+  files: string[];
+  active: string;
+}
+
+const { files, active } = Astro.props;
+---
+
+<aside class="sidebar">
+  <div class="sidebar__header">Archivos</div>
+  <div class="sidebar__root">▾ amarrete</div>
+  <nav class="sidebar__list">
+    {
+      files.map((file) => (
+        <button
+          class:list={["file-item", { "is-active": file === active }]}
+          data-file={file}
+          type="button"
+          aria-label={`Abrir ${file}`}
+        >
+          <span class="file-icon">{file.split(".").pop()?.toUpperCase()}</span>
+          <span class="file-name">{file}</span>
+        </button>
+      ))
+    }
+  </nav>
+</aside>

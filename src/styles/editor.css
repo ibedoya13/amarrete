@@ -1,0 +1,381 @@
+/* ============================================================
+   amarrete — editor shell & code styling
+   Estética VSCode + terminal (WebTUI / Catppuccin Mocha)
+   ============================================================ */
+
+html,
+body {
+  height: 100%;
+}
+
+:root {
+  --font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Title bar --- */
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2ch;
+  padding: 0 2ch;
+  min-height: 3lh;
+  background: var(--background1);
+  border-bottom: 1px solid var(--background2);
+  user-select: none;
+}
+
+.titlebar__left,
+.titlebar__right {
+  display: flex;
+  align-items: center;
+  gap: 2ch;
+}
+
+.titlebar__dots {
+  display: flex;
+  gap: 1ch;
+}
+
+.titlebar__dot {
+  width: 1ch;
+  height: 1ch;
+  border-radius: 50%;
+}
+
+.titlebar__dot--red {
+  background: var(--red);
+}
+
+.titlebar__dot--yellow {
+  background: var(--yellow);
+}
+
+.titlebar__dot--green {
+  background: var(--green);
+}
+
+.titlebar__repo {
+  color: var(--foreground1);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 1ch;
+  height: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--foreground1);
+  font: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme-toggle:hover {
+  color: var(--foreground0);
+}
+
+.theme-toggle:focus {
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.theme-toggle:focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.theme-toggle__icon {
+  color: var(--peach);
+}
+
+.titlebar__file {
+  color: var(--foreground0);
+  font-weight: var(--font-weight-bold);
+}
+
+/* --- Tab bar --- */
+.tabbar {
+  display: flex;
+  align-items: stretch;
+  background: var(--background1);
+  border-bottom: 1px solid var(--background2);
+  user-select: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  padding: 0 2ch;
+  min-height: 3lh;
+  color: var(--foreground1);
+  border-right: 1px solid var(--background2);
+}
+
+.tab.is-active {
+  background: var(--background0);
+  color: var(--foreground0);
+  border-top: 2px solid var(--blue);
+}
+
+.tab__dot {
+  color: var(--blue);
+}
+
+/* --- Main split --- */
+.editor__main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.editor__content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  background: var(--background0);
+}
+
+.breadcrumb {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  padding: calc(0.5lh) 2ch;
+  background: var(--background0);
+  border-bottom: 1px solid var(--background2);
+  color: var(--foreground2);
+  font-size: smaller;
+  user-select: none;
+}
+
+.breadcrumb .crumb-sep {
+  color: var(--overlay2);
+}
+
+.breadcrumb .crumb-file {
+  color: var(--foreground1);
+}
+
+/* --- Sidebar (explorer) --- */
+.sidebar {
+  width: 32ch;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  background: var(--background1);
+  border-left: 1px solid var(--background2);
+  overflow-y: auto;
+}
+
+.sidebar__header {
+  padding: 1lh 2ch calc(0.5lh);
+  color: var(--foreground2);
+  font-size: smaller;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.sidebar__root {
+  padding: calc(0.25lh) 2ch;
+  color: var(--foreground1);
+  user-select: none;
+}
+
+.sidebar__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1ch;
+  width: 100%;
+  height: auto;
+  padding: calc(0.2lh) 2ch;
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  color: var(--foreground0);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.file-item:focus,
+.file-item:focus-visible {
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.file-item:hover {
+  background: var(--background2);
+}
+
+.file-item:focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: -1px;
+}
+
+.file-item.is-active {
+  background: var(--background2);
+  border-left-color: var(--blue);
+}
+
+.file-item .file-icon {
+  width: 4ch;
+  flex: none;
+  color: var(--blue);
+  font-weight: var(--font-weight-bold);
+}
+
+.file-item .file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Code panel --- */
+.panel[hidden] {
+  display: none;
+}
+
+.code {
+  display: flex;
+  flex-direction: column;
+  counter-reset: ln;
+  white-space: pre;
+  padding: 1lh 0 2lh;
+}
+
+.line {
+  counter-increment: ln;
+  position: relative;
+  padding-left: 6ch;
+  min-height: 1lh;
+  word-break: normal;
+}
+
+.line::before {
+  content: counter(ln);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4ch;
+  padding-right: 2ch;
+  text-align: right;
+  color: var(--overlay2);
+  user-select: none;
+}
+
+/* --- Syntax tokens --- */
+.tk-kw {
+  color: var(--mauve);
+}
+
+.tk-str {
+  color: var(--green);
+}
+
+.tk-num {
+  color: var(--peach);
+}
+
+.tk-key {
+  color: var(--blue);
+}
+
+.tk-com {
+  color: var(--overlay0);
+  font-style: italic;
+}
+
+.tk-pn {
+  color: var(--overlay1);
+}
+
+.tk-type {
+  color: var(--yellow);
+}
+
+.tk-fn {
+  color: var(--blue);
+}
+
+/* --- Status bar --- */
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2ch;
+  padding: 0 2ch;
+  min-height: 3lh;
+  background: var(--background1);
+  border-top: 1px solid var(--background2);
+  color: var(--foreground1);
+  font-size: smaller;
+  user-select: none;
+}
+
+.statusbar__group {
+  display: flex;
+  align-items: center;
+  gap: 2ch;
+}
+
+.sb-item {
+  white-space: nowrap;
+}
+
+.sb-branch {
+  color: var(--foreground0);
+}
+
+.sb-ok {
+  color: var(--green);
+}
+
+.sb-warn {
+  color: var(--yellow);
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .editor__main {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    order: -1;
+    width: 100%;
+    border-left: none;
+    border-bottom: 1px solid var(--background2);
+    max-height: 40vh;
+  }
+
+  .editor__content {
+    min-height: 0;
+  }
+}
