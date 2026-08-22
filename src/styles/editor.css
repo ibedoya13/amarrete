@@ -432,6 +432,22 @@ body {
   color: var(--foreground1);
 }
 
+.mobile-notice__download {
+  display: inline-flex;
+  align-items: center;
+  gap: 1ch;
+  margin-top: 1lh;
+  padding: calc(0.5lh) 3ch;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+}
+
+.mobile-notice__download:hover {
+  background: var(--background1);
+}
+
 @media (max-width: 640px) {
   .editor {
     display: none;

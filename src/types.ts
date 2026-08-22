@@ -55,6 +55,8 @@ export interface ContactInfo {
   email: string;
   sitio: string;
   ubicacion: string;
+  /** Endpoint que sirve el CV en PDF como descarga. */
+  cv: string;
   redes: SocialLinks;
 }
 

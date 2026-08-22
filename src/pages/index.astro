@@ -85,6 +85,7 @@ const contacto: ContactInfo = {
   email: "luisbedoya13@gmail.com",
   sitio: "personal.amarrete.com",
   ubicacion: "Ciudad de Panamá, Panamá",
+  cv: "/api/download-cv",
   redes: {
     github: "https://github.com/ibedoya13",
     linkedin: "https://www.linkedin.com/in/luis-david-bedoya-restrepo-baa998167/",
@@ -356,6 +357,9 @@ const activo: SectionFile = "sobre-mi.ts";
         Esta vista está optimizada para pantallas grandes. Accede desde una tableta o computadora
         para ver el contenido.
       </p>
+      <a class="mobile-notice__download" href={contacto.cv} download>
+        <span aria-hidden="true">⬇</span> Descargar CV (PDF)
+      </a>
     </div>
   </div>
 </Layout>
