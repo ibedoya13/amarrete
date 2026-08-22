@@ -1,19 +1,23 @@
 ---
 import "../styles/editor.css";
+import { THEMES, type Theme } from "../types";
 
 interface Props {
   title?: string;
   description?: string;
+  /** Initial site theme (defaults to dark). */
+  theme?: Theme;
 }
 
 const {
   title = "Amarrete - personal",
   description = "Sitio personal con mi currículum e información personal.",
+  theme = THEMES.dark,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" data-webtui-theme="catppuccin-mocha">
+<html lang="es" data-webtui-theme={theme}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />

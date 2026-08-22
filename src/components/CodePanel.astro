@@ -1,10 +1,16 @@
 ---
-// Panel de "archivo" abierto en el editor: muestra el contenido como código.
-// `lines` es una lista de fragmentos HTML ya resaltados (uno por línea).
+// Open "file" panel in the editor: shows the content as code.
+// `lines` is a list of already-highlighted HTML fragments (one per line).
+import type { HighlightedLine, Language, SectionFile } from "../types";
+
 interface Props {
-  file: string;
-  language: string;
-  lines: string[];
+  /** Section file name shown by this panel. */
+  file: SectionFile;
+  /** File language (reflected in the status bar). */
+  language: Language;
+  /** Already-highlighted lines, ready to inject as HTML. */
+  lines: HighlightedLine[];
+  /** If `true`, the panel starts visible. */
   active?: boolean;
 }
 

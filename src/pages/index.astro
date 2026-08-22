@@ -3,8 +3,18 @@ import Layout from "../layouts/Layout.astro";
 import Explorer from "../components/Explorer.astro";
 import StatusBar from "../components/StatusBar.astro";
 import CodePanel from "../components/CodePanel.astro";
+import {
+  SECTION_FILES,
+  type ContactInfo,
+  type HighlightedLine,
+  type Hobby,
+  type JobPosition,
+  type Profile,
+  type Project,
+  type SectionFile,
+} from "../types";
 
-const perfil = {
+const perfil: Profile = {
   nombre: "Luis Bedoya",
   rol: "Ingeniero de Software",
   tagline:
@@ -19,7 +29,7 @@ const perfil = {
   ],
 };
 
-const experiencia = [
+const experiencia: JobPosition[] = [
   {
     empresa: "Banistmo",
     rol: "Ingeniero de software",
@@ -52,24 +62,26 @@ const experiencia = [
   },
 ];
 
-const habilidades = [
-  "Proyectos construidos en la nube con diferentes proveedores, empleando arquitecturas serverless.",
-  "Buenas prácticas de DevOps en el ciclo de vida del software.",
-  "Trabajo con varios lenguajes y tecnologías, participando desde el diseño hasta la implementación y mantenimiento.",
-  "Diseño de las soluciones de arquitectura de las aplicaciones.",
+const habilidades: string[] = [
+  "- Proyectos construidos en la nube con diferentes proveedores (AWS, Cloudflare, GCP).",
+  "- Diseño de las soluciones de arquitectura de las aplicaciones.",
+  "- Buenas prácticas de DevOps en el ciclo de vida del software.",
+  "- Enfoque en código seguro siguiendo estándares de la industria, y ...",
+  "...el tratamiento oportuno de vulnerabilidades reactivas.",
+  "- Trabajo con varios lenguajes y tecnologías, participando desde el diseño...",
+  "...hasta la implementación y mantenimiento del código.",
 ];
 
-const proyectos = [
+const proyectos: Project[] = [
   {
     nombre: "amarrete",
-    descripcion:
-      "Mi CV e información personal, inspirado en TUIs y editores de texto. Exactamente lo que estás viendo.",
+    descripcion: "Mi CV e información personal, inspirado en TUIs y editores de texto.",
     stack: ["Astro", "WebTUI", "CSS"],
     url: "https://personal.amarrete.com",
   },
 ];
 
-const contacto = {
+const contacto: ContactInfo = {
   email: "luisbedoya13@gmail.com",
   sitio: "personal.amarrete.com",
   ubicacion: "Ciudad de Panamá, Panamá",
@@ -79,7 +91,7 @@ const contacto = {
   },
 };
 
-const hobbies = [
+const hobbies: Hobby[] = [
   { nombre: "Categorías de automovilismo", descripcion: "La Fórmula 1, el WEC y la IndyCar." },
   {
     nombre: "Videojuegos",
@@ -97,7 +109,8 @@ const hobbies = [
   },
   {
     nombre: "Mis mascotas",
-    descripcion: "Me gusta salir a pasear con mis perras y llevarlas a diferentes lugares en mi auto.",
+    descripcion:
+      "Me gusta salir a pasear con mis perras y llevarlas a diferentes lugares en mi auto.",
   },
 ];
 
@@ -190,7 +203,7 @@ const proyectosSrc = [
 // prefijo para que el resaltador las deje intactas.
 const HTML_SENTINEL = "\u0002HTML\u0002";
 
-function linkLine(indent: string, key: string, url: string, external = true): string {
+function linkLine(indent: string, key: string, url: string, external = true): HighlightedLine {
   const attrs = external ? ` target="_blank" rel="noopener noreferrer"` : "";
   return (
     HTML_SENTINEL +
@@ -219,14 +232,26 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function highlightLine(line: string): string {
+/** Clases CSS de cada grupo de captura del regex del resaltador. */
+const TOKEN_CLASSES: readonly (string | null)[] = [
+  null,
+  "tk-com",
+  "tk-str",
+  "tk-num",
+  "tk-kw",
+  "tk-type",
+  "tk-key",
+  "tk-pn",
+];
+
+function highlightLine(line: string): HighlightedLine {
   // Las líneas marcadas con el centinela ya vienen como HTML listo.
   if (line.startsWith(HTML_SENTINEL)) {
     return line.slice(HTML_SENTINEL.length);
   }
   const re =
     /(\/\/.*$)|("(?:[^"\n]*)")|(\b\d+\b)|(\b(?:export|const|interface|type)\b)|(\b(?:string|number|boolean|Puesto)\b(?:\[\])?)|([A-Za-z_$][\w$]*)(?=\s*:)|([{}[\]();,:=])/g;
-  const cls = [null, "tk-com", "tk-str", "tk-num", "tk-kw", "tk-type", "tk-key", "tk-pn"];
+  const cls = TOKEN_CLASSES;
   let out = "";
   let last = 0;
   let m: RegExpExecArray | null;
@@ -240,16 +265,9 @@ function highlightLine(line: string): string {
   return out;
 }
 
-const archivos = [
-  "sobre-mi.ts",
-  "experiencia.ts",
-  "habilidades.ts",
-  "hobbies.ts",
-  "proyectos.ts",
-  "contacto.ts",
-];
+const archivos: readonly SectionFile[] = SECTION_FILES;
 
-const activo = "sobre-mi.ts";
+const activo: SectionFile = "sobre-mi.ts";
 ---
 
 <Layout
@@ -343,21 +361,25 @@ const activo = "sobre-mi.ts";
 </Layout>
 
 <script>
-  const panels = Array.from(document.querySelectorAll("[data-panel]"));
-  const items = Array.from(document.querySelectorAll("[data-file]"));
-  const fileEls = document.querySelectorAll("[data-status-file]");
-  const langEls = document.querySelectorAll("[data-status-lang]");
-  const linesEl = document.querySelector("[data-status-lines]");
-  const DEFAULT = "sobre-mi.ts";
+  import type { SectionFile, Theme } from "../types";
 
-  function getFile() {
+  // ── Navegación de secciones (SPA) ──
+
+  const panels: HTMLElement[] = Array.from(document.querySelectorAll<HTMLElement>("[data-panel]"));
+  const items: HTMLElement[] = Array.from(document.querySelectorAll<HTMLElement>("[data-file]"));
+  const fileEls = document.querySelectorAll<HTMLElement>("[data-status-file]");
+  const langEls = document.querySelectorAll<HTMLElement>("[data-status-lang]");
+  const linesEl = document.querySelector<HTMLElement>("[data-status-lines]");
+  const DEFAULT: SectionFile = "sobre-mi.ts";
+
+  function getFile(): SectionFile {
     const hash = decodeURIComponent(location.hash.slice(1));
-    return items.some((i) => i.dataset.file === hash) ? hash : DEFAULT;
+    return items.some((i) => i.dataset.file === hash) ? (hash as SectionFile) : DEFAULT;
   }
 
-  let current = null;
+  let current: SectionFile | null = null;
 
-  function activate(file) {
+  function activate(file: SectionFile): void {
     const panel = panels.find((p) => p.dataset.panel === file);
     if (!panel || file === current) return;
 
@@ -381,7 +403,7 @@ const activo = "sobre-mi.ts";
 
   items.forEach((item) => {
     item.addEventListener("click", () => {
-      location.hash = item.dataset.file;
+      location.hash = item.dataset.file ?? "";
     });
   });
 
@@ -392,26 +414,29 @@ const activo = "sobre-mi.ts";
     const idx = items.findIndex((i) => i.classList.contains("is-active"));
     const delta = e.key === "ArrowDown" ? 1 : -1;
     const next = items[(idx + delta + items.length) % items.length];
-    location.hash = next.dataset.file;
+    location.hash = next.dataset.file ?? "";
     e.preventDefault();
   });
 
   activate(getFile());
 
-  // ── Toggle de tema (Catppuccin Mocha ⇄ Latte) ──
+  // ── Theme toggle (Catppuccin Mocha ⇄ Latte) ──
   const THEME_KEY = "webtui-theme";
-  const MOCHA = "catppuccin-mocha";
-  const LATTE = "catppuccin-latte";
-  const THEME_LABELS = { [MOCHA]: "Catppuccin Mocha", [LATTE]: "Catppuccin Latte" };
+  const MOCHA: Theme = "catppuccin-mocha";
+  const LATTE: Theme = "catppuccin-latte";
+  const THEME_LABELS: Record<Theme, string> = {
+    [MOCHA]: "Catppuccin Mocha",
+    [LATTE]: "Catppuccin Latte",
+  };
 
-  const themeToggle = document.querySelector("[data-theme-toggle]");
-  const themeLabel = document.querySelector("[data-theme-label]");
+  const themeToggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  const themeLabel = document.querySelector<HTMLElement>("[data-theme-label]");
 
-  function currentTheme() {
+  function currentTheme(): Theme {
     return document.documentElement.dataset.webtuiTheme === LATTE ? LATTE : MOCHA;
   }
 
-  function applyTheme(theme) {
+  function applyTheme(theme: Theme): void {
     document.documentElement.dataset.webtuiTheme = theme;
     try {
       localStorage.setItem(THEME_KEY, theme);

@@ -1,8 +1,12 @@
 ---
-// Barra lateral (explorador de archivos) con las secciones como archivos.
+// Sidebar (file explorer) listing sections as files.
+import type { SectionFile } from "../types";
+
 interface Props {
-  files: string[];
-  active: string;
+  /** Section file names, in display order. */
+  files: readonly SectionFile[];
+  /** Initially active file. */
+  active: SectionFile;
 }
 
 const { files, active } = Astro.props;
