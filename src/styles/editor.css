@@ -12,6 +12,26 @@ body {
   --font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
+/* Escalado progresivo en pantallas grandes: al basarse todo el layout en
+   ch/lh, basta con aumentar --font-size para escalar texto y espaciados. */
+@media (min-width: 1440px) {
+  :root {
+    --font-size: 18px;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --font-size: 20px;
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --font-size: 22px;
+  }
+}
+
 body {
   display: flex;
   flex-direction: column;

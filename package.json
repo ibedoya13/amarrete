@@ -12,7 +12,7 @@
     "preview": "astro preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "deploy": "wrangler pages publish dist --project-name amarrete"
+    "deploy": "wrangler pages deploy dist --project-name amarrete"
   },
   "dependencies": {
     "@webtui/css": "^0.1.10",
