@@ -336,6 +336,21 @@ body {
   color: var(--overlay1);
 }
 
+.tk-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tk-link:hover {
+  text-decoration: underline;
+  color: var(--sky);
+}
+
+.tk-link:focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: 2px;
+}
+
 .tk-type {
   color: var(--yellow);
 }

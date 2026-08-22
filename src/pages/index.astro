@@ -87,10 +87,6 @@ const hobbies = [
       "Me gustan los juegos de rol, FPS y carreras. Pueden encontrarme en eFootball como 'Amarrete'.",
   },
   {
-    nombre: "Cine y películas",
-    descripcion: "Soy muy selectivo con las películas que voy a ver al cine.",
-  },
-  {
     nombre: "Salir a comer",
     descripcion: "Me gusta comprar ofertas y probar nuevos restaurantes.",
   },
@@ -98,6 +94,10 @@ const hobbies = [
     nombre: "Anime y Manga",
     descripcion:
       "Suelo seguir entre tres y cuatro animes por temporada, y me gusta leer mangas semanalmente.",
+  },
+  {
+    nombre: "Mis mascotas",
+    descripcion: "Me gusta salir a pasear con mis perras y llevarlas a diferentes lugares en mi auto.",
   },
 ];
 
@@ -186,16 +186,29 @@ const proyectosSrc = [
   "];",
 ];
 
+// Líneas que ya llevan su propio HTML (p. ej. enlaces) empiezan con este
+// prefijo para que el resaltador las deje intactas.
+const HTML_SENTINEL = "\u0002HTML\u0002";
+
+function linkLine(indent: string, key: string, url: string, external = true): string {
+  const attrs = external ? ` target="_blank" rel="noopener noreferrer"` : "";
+  return (
+    HTML_SENTINEL +
+    `${indent}<span class="tk-key">${key}</span><span class="tk-pn">:</span> ` +
+    `<a class="tk-link" href="${url}"${attrs}>` +
+    `<span class="tk-str">"${url.replace(/^mailto:/, "")}"</span></a><span class="tk-pn">,</span>`
+  );
+}
+
 const contactoSrc = [
   "// contacto.ts",
   "",
   "export const contacto = {",
-  `  email: "${contacto.email}",`,
+  linkLine("  ", "email", `mailto:${contacto.email}`, false),
   `  sitio: "${contacto.sitio}",`,
   `  ubicacion: "${contacto.ubicacion}",`,
   "  redes: {",
-  `    github: "${contacto.redes.github}",`,
-  `    linkedin: "${contacto.redes.linkedin}",`,
+  ...Object.entries(contacto.redes).map(([key, url]) => linkLine("    ", key, url)),
   "  },",
   "};",
 ];
@@ -207,6 +220,10 @@ function escapeHtml(s: string): string {
 }
 
 function highlightLine(line: string): string {
+  // Las líneas marcadas con el centinela ya vienen como HTML listo.
+  if (line.startsWith(HTML_SENTINEL)) {
+    return line.slice(HTML_SENTINEL.length);
+  }
   const re =
     /(\/\/.*$)|("(?:[^"\n]*)")|(\b\d+\b)|(\b(?:export|const|interface|type)\b)|(\b(?:string|number|boolean|Puesto)\b(?:\[\])?)|([A-Za-z_$][\w$]*)(?=\s*:)|([{}[\]();,:=])/g;
   const cls = [null, "tk-com", "tk-str", "tk-num", "tk-kw", "tk-type", "tk-key", "tk-pn"];
