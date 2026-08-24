@@ -1,19 +1,17 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "amarrete",
-	"compatibility_date": "2025-03-01",
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
-	"assets": {
-		"directory": "./dist",
-	},
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "amarrete",
+  "compatibility_date": "2025-03-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+  },
   "preview_urls": false,
   "workers_dev": false,
-	"r2_buckets": [
-		{
-			"binding": "BUCKET_STATIC",
-			"bucket_name": "personal-amarrete-prod-static",
-		},
-	],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET_STATIC",
+      "bucket_name": "personal-amarrete-prod-static",
+    },
+  ],
 }
