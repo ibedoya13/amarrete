@@ -11,5 +11,8 @@ export default defineConfig({
     // Usa wrangler.jsonc de la raíz: habilita locals.runtime con los
     // bindings (BUCKET_STATIC) también en desarrollo.
     configPath: "wrangler.jsonc",
+    // Conecta los bindings al bucket real de Cloudflare en `astro dev`.
+    // Requiere sesión activa (`npx wrangler login`).
+    remoteBindings: true,
   }),
 });

@@ -6,12 +6,11 @@
   "assets": {
     "directory": "./dist",
   },
-  "preview_urls": false,
-  "workers_dev": false,
   "r2_buckets": [
     {
       "binding": "BUCKET_STATIC",
       "bucket_name": "personal-amarrete-prod-static",
+      "remote": true,
     },
   ],
 }
