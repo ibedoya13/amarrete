@@ -3,9 +3,17 @@
   "name": "amarrete",
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat"],
+  "preview_urls": false,
+  "workers_dev": false,
   "assets": {
     "directory": "./dist",
   },
+  "routes": [
+    {
+      "pattern": "personal.amarrete.com",
+      "custom_domain": true,
+    },
+  ],
   "r2_buckets": [
     {
       "binding": "BUCKET_STATIC",
