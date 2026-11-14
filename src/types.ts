@@ -16,7 +16,8 @@ export interface EducationItem {
 export interface Profile {
   nombre: string;
   rol: string;
-  tagline: string;
+  /** Presentation lines of the profile (one per sentence). */
+  tagline: string[];
   ubicacion: string;
   educacion: EducationItem[];
 }
@@ -26,7 +27,8 @@ export interface JobPosition {
   empresa: string;
   rol: string;
   periodo: string;
-  descripcion: string;
+  /** Description bullets of the role (one per line). */
+  descripcion: string[];
   stack: string[];
 }
 
@@ -39,7 +41,8 @@ export interface Hobby {
 /** Featured personal project. */
 export interface Project {
   nombre: string;
-  descripcion: string;
+  /** Description bullets of the project (one per line). */
+  descripcion: string[];
   stack: string[];
   url?: string;
 }

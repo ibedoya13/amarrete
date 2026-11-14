@@ -14,27 +14,31 @@
     "preview": "astro preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "deploy": "wrangler deploy"
+    "deploy": "npm run build && wrangler deploy --config dist/server/wrangler.json",
+    "pdf": "for f in static/curriculum-ldbr-*.md; do npx md-to-pdf \"$f\"; done",
+    "upload:cv": "./scripts/upload-cv.sh",
+    "cv": "npm run pdf && npm run upload:cv"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.2.3",
+    "@astrojs/cloudflare": "^14.4.6",
     "@webtui/css": "^0.1.10",
     "@webtui/theme-catppuccin": "^0.0.5",
-    "astro": "^7.0.6"
+    "astro": "^7.4.7"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "@types/node": "^26.2.0",
-    "prettier": "^3.9.6",
-    "prettier-plugin-astro": "^0.14.1",
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^26.6.6",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
     "typescript": "^6.0.3",
-    "wrangler": "^4.107.0"
+    "wrangler": "^4.158.0"
   },
   "allowScripts": {
-    "esbuild@0.28.1": true,
     "fsevents@2.3.3": true,
     "sharp@0.34.5": true,
     "sharp@0.35.3": true,
-    "workerd@1.20260811.1": true
+    "esbuild@0.28.2": true,
+    "workerd@1.20261101.1": true,
+    "workerd@1.20261104.1": true
   }
 }

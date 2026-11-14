@@ -16,15 +16,18 @@ import {
 
 const perfil: Profile = {
   nombre: "Luis Bedoya",
-  rol: "Ingeniero de Software",
-  tagline:
-    "Me gusta construir soluciones eficientes, y solucionar problemas de la manera más simple posible.",
-  ubicacion: "Ciudad de Panamá, Panamá",
+  rol: "Ingeniero de Software Senior · Backend & Cloud (TypeScript / Node.js · Go · AWS)",
+  tagline: [
+    "Ingeniero de software con 7+ años diseñando, manteniendo y evolucionando aplicaciones críticas para el sector bancario y financiero.",
+    "Especializado en arquitecturas TypeScript/Node.js sobre AWS: diseño de APIs y microservicios, desarrollo seguro (OWASP) y automatización de despliegues.",
+    "Trabajo de extremo a extremo, desde las decisiones de arquitectura y la revisión de código hasta la operación en producción y la remediación de vulnerabilidades en entornos regulados.",
+  ],
+  ubicacion: "Medellín, Colombia · Ciudad de Panamá, Panamá (disponible para trabajo remoto)",
   educacion: [
     {
-      titulo: "Ingeniería en Sistemas con Énfasis en Desarrollo de Software",
+      titulo: "Ingeniería en Sistemas (Énfasis en Desarrollo de Software)",
       institucion: "Universidad Interamericana de Panamá",
-      periodo: "2014 — 2017 (DNF)",
+      periodo: "2014 — 2017",
     },
   ],
 };
@@ -32,51 +35,97 @@ const perfil: Profile = {
 const experiencia: JobPosition[] = [
   {
     empresa: "Banistmo",
-    rol: "Ingeniero de software",
-    periodo: "dic. 2022 - actualidad",
-    descripcion: "Encargado del soporte y evolución de aplicaciones internas y públicas.",
-    stack: ["Nube de AWS", "TypeScript", "Node.js", "Python", "Angular", "React"],
+    rol: "Ingeniero de Software",
+    periodo: "dic. 2022 — Actualidad",
+    descripcion: [
+      "Responsable de la evolución de las arquitecturas web de tres aplicaciones de misión crítica (dos internas y una de cara al cliente).",
+      "Decisiones de diseño, estándares de código y revisión de pull requests del equipo.",
+      "Diseño e integración de microservicios y APIs REST en Node.js y Python sobre AWS, con pipelines de CI/CD.",
+      "Optimización de rendimiento de APIs y consultas, operando bajo un proceso de liberación corporativo de 3–4 días.",
+      "Pruebas unitarias y de integración en backend y frontend (Vitest, Jest, Mocha) como puerta de calidad previa al despliegue.",
+      "Remediación continua de vulnerabilidades —análisis estático, análisis dinámico e infraestructura— priorizadas por criticidad.",
+      "Hasta 10 vulnerabilidades cerradas en un mismo día, sobre un backlog que recibe reportes semanales.",
+      "Acompañamiento de nuevos integrantes y refinamiento de tareas con el equipo durante la planificación de cada sprint.",
+    ],
+    stack: ["AWS", "TypeScript", "Node.js", "Python", "Angular", "React", "Vitest", "CI/CD"],
   },
   {
     empresa: "HyperNova Labs",
-    rol: "Desarrollador web full-stack",
-    periodo: "oct. 2019 - nov. 2022",
-    descripcion:
-      "Desarrollador outsourcing en proyectos de servicios de información y clientes en Banistmo S.A.",
-    stack: ["Angular", "Node.js", "Java"],
+    rol: "Desarrollador Full-Stack",
+    periodo: "oct. 2019 — nov. 2022",
+    descripcion: [
+      "Consultoría para Banistmo S.A.: proyectos estratégicos de servicios de información trabajando dentro de los equipos del cliente.",
+      "Construcción y consumo de APIs de alta disponibilidad en Java y Node.js, integradas con interfaces dinámicas en Angular.",
+      "Pruebas unitarias y de integración en frontend y backend (Jasmine/Karma, Mocha, Jest) sobre servicios y flujos críticos.",
+      "Rediseño de flujos operativos y descomposición de arquitecturas legacy hacia componentes más desacoplados y mantenibles.",
+    ],
+    stack: ["Angular", "Node.js", "Java", "REST APIs", "Jasmine/Karma", "Jest"],
   },
   {
     empresa: "Rootstack",
-    rol: "Desarrollador web full-stack",
-    periodo: "may. 2019 - oct. 2019",
-    descripcion: "Desarrollador in situ trabajando con clientes locales de la compañía.",
-    stack: ["PHP", "Laravel", "Drupal"],
+    rol: "Desarrollador Full-Stack",
+    periodo: "may. 2019 — oct. 2019",
+    descripcion: [
+      "Desarrollo e implementación in situ de soluciones empresariales para clientes del sector privado.",
+      "Participación desde el levantamiento de requerimientos hasta la puesta en producción.",
+    ],
+    stack: ["PHP", "Laravel", "Drupal", "MySQL"],
   },
   {
     empresa: "HyperNova Labs",
-    rol: "Desarrollador web front-end",
-    periodo: "jul. 2018 - may. 2019",
-    descripcion:
-      "Desarrollador outsourcing en proyectos de transformación digital en Banesco (Panamá), S.A.",
-    stack: ["TypeScript", "Angular", "Sass"],
+    rol: "Desarrollador Front-End",
+    periodo: "jul. 2018 — may. 2019",
+    descripcion: [
+      "Participación en la transformación digital de la banca en línea de Banesco (Panamá), S.A.",
+      "Creación de componentes modulares, reutilizables y responsivos con TypeScript, Angular y Sass.",
+    ],
+    stack: ["TypeScript", "Angular", "Sass", "HTML5/CSS3"],
   },
 ];
 
 const habilidades: string[] = [
-  "- Proyectos construidos en la nube con diferentes proveedores (AWS, Cloudflare, GCP).",
-  "- Diseño de las soluciones de arquitectura de las aplicaciones.",
-  "- Buenas prácticas de DevOps en el ciclo de vida del software.",
-  "- Enfoque en código seguro siguiendo estándares de la industria, y ...",
-  "...el tratamiento oportuno de vulnerabilidades reactivas.",
-  "- Trabajo con varios lenguajes y tecnologías, participando desde el diseño...",
-  "...hasta la implementación y mantenimiento del código.",
+  "- Lenguajes: TypeScript, JavaScript, Python, Java, Go, PHP.",
+  "- Backend & APIs: Node.js, Express, REST, microservicios, diseño de APIs, WebSockets.",
+  "- Frontend: Angular, React, Astro, HTML5, Sass/CSS.",
+  "- Cloud & DevOps: AWS, Cloudflare Workers, GCP, Docker, CI/CD, Git.",
+  "- Pruebas: Vitest, Jest, Mocha, Jasmine/Karma, Japa — pruebas unitarias y de integración (frontend y backend).",
+  "- Seguridad: OWASP Top 10, análisis de dependencias, remediación de vulnerabilidades.",
+  "- Arquitectura: soluciones escalables, integración de sistemas, refactorización de código legacy.",
 ];
 
 const proyectos: Project[] = [
   {
+    nombre: "midway",
+    descripcion: [
+      "Juego de batalla naval multijugador en tiempo real, con backend en Go 1.22 y SPA en Vue 3 + TypeScript comunicados por WebSocket.",
+      "Servidor autoritativo sobre las reglas (colocación de flota, turnos, disparos, hundimientos): el cliente no puede alterar el estado.",
+      "Hub WebSocket propio sobre gorilla/websocket: salas con código de 6 dígitos y clave secreta de 32 caracteres.",
+      "Clave generada con crypto/rand y comparada en tiempo constante; límite de conexiones por IP y estado aislado por sala.",
+      "Dominio del juego desacoplado del transporte (paquetes game, room y ws), con pruebas de tablero, turnos, reanudación e integración.",
+      "Endurecimiento del transporte: validación de Origin en el upgrade y límite de mensajes por socket.",
+      "Vistas de estado personalizadas que no revelan la flota del rival; SPA en Cloudflare y backend en Docker.",
+    ],
+    stack: [
+      "Go",
+      "gorilla/websocket",
+      "Docker",
+      "Vue 3",
+      "TypeScript",
+      "Vite",
+      "Vitest",
+      "Cloudflare",
+    ],
+    url: "https://midway.amarrete.com",
+  },
+  {
     nombre: "amarrete",
-    descripcion: "Mi CV e información personal, inspirado en TUIs y editores de texto.",
-    stack: ["Astro", "WebTUI", "CSS"],
+    descripcion: [
+      "Sitio personal y CV interactivo: aplicación Astro con renderizado en servidor (SSR) desplegada en Cloudflare Workers.",
+      "Documentos servidos desde Cloudflare R2 a través de una API.",
+      "Interfaz tipo editor de código construida sobre WebTUI, con un resaltador de sintaxis propio para el contenido del CV.",
+      "Verificación automatizada de tipos, build y formato en el flujo de trabajo del proyecto.",
+    ],
+    stack: ["Astro", "TypeScript", "Cloudflare Workers", "R2", "WebTUI", "CSS"],
     url: "https://personal.amarrete.com",
   },
 ];
@@ -124,7 +173,9 @@ const sobreMiSrc = [
   "export const about = {",
   `  nombre: "${perfil.nombre}",`,
   `  rol: "${perfil.rol}",`,
-  `  tagline: "${perfil.tagline}",`,
+  "  tagline: [",
+  ...perfil.tagline.map((t) => `    "${t}",`),
+  "  ],",
   `  ubicacion: "${perfil.ubicacion}",`,
   "  educacion: [",
   ...perfil.educacion.flatMap((e) => [
@@ -145,7 +196,7 @@ const experienciaSrc = [
   "  empresa: string;",
   "  rol: string;",
   "  periodo: string;",
-  "  descripcion: string;",
+  "  descripcion: string[];",
   "  stack: string[];",
   "}",
   "",
@@ -155,7 +206,9 @@ const experienciaSrc = [
     `    empresa: "${j.empresa}",`,
     `    rol: "${j.rol}",`,
     `    periodo: "${j.periodo}",`,
-    `    descripcion: "${j.descripcion}",`,
+    "    descripcion: [",
+    ...j.descripcion.map((d) => `      "${d}",`),
+    "    ],",
     `    stack: [${j.stack.map((t) => `"${t}"`).join(", ")}],`,
     "  },",
   ]),
@@ -192,7 +245,9 @@ const proyectosSrc = [
   ...proyectos.flatMap((p) => [
     "  {",
     `    nombre: "${p.nombre}",`,
-    `    descripcion: "${p.descripcion}",`,
+    "    descripcion: [",
+    ...p.descripcion.map((d) => `      "${d}",`),
+    "    ],",
     `    stack: [${p.stack.map((t) => `"${t}"`).join(", ")}],`,
     ...(p.url ? [`    url: "${p.url}",`] : []),
     "  },",
@@ -283,9 +338,13 @@ const activo: SectionFile = "sobre-mi.ts";
           <span class="titlebar__dot titlebar__dot--yellow"></span>
           <span class="titlebar__dot titlebar__dot--green"></span>
         </div>
-        <span class="titlebar__repo" translate="no">amarrete</span>
+        <span class="titlebar__repo" translate="no">
+          amarrete
+        </span>
       </div>
-      <div class="titlebar__file" data-status-file>{activo}</div>
+      <div class="titlebar__file" data-status-file>
+        {activo}
+      </div>
       <div class="titlebar__right">
         <button
           class="titlebar__repo theme-toggle"
@@ -293,7 +352,9 @@ const activo: SectionFile = "sobre-mi.ts";
           type="button"
           aria-label="Cambiar entre tema oscuro y claro"
         >
-          <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+          <span class="theme-toggle__icon" aria-hidden="true">
+            ◐
+          </span>
           <span data-theme-label>Catppuccin Mocha</span>
         </button>
       </div>
@@ -301,7 +362,9 @@ const activo: SectionFile = "sobre-mi.ts";
 
     <div class="tabbar">
       <div class="tab is-active">
-        <span class="tab__dot" aria-hidden="true">●</span>
+        <span class="tab__dot" aria-hidden="true">
+          ●
+        </span>
         <span data-status-file>{activo}</span>
       </div>
     </div>
@@ -309,9 +372,13 @@ const activo: SectionFile = "sobre-mi.ts";
     <div class="editor__main">
       <main class="editor__content">
         <div class="breadcrumb">
-          <span translate="no">amarrete</span><span class="crumb-sep">›</span><span>src</span><span
-            class="crumb-sep">›</span
-          ><span class="crumb-file" data-status-file>{activo}</span>
+          <span translate="no">amarrete</span>
+          <span class="crumb-sep">›</span>
+          <span>src</span>
+          <span class="crumb-sep">›</span>
+          <span class="crumb-file" data-status-file>
+            {activo}
+          </span>
         </div>
 
         <CodePanel
@@ -351,7 +418,9 @@ const activo: SectionFile = "sobre-mi.ts";
 
   <div class="mobile-notice">
     <div class="mobile-notice__content">
-      <span class="mobile-notice__glyph" aria-hidden="true">🖥️</span>
+      <span class="mobile-notice__glyph" aria-hidden="true">
+        🖥️
+      </span>
       <p class="mobile-notice__title">amarrete</p>
       <p class="mobile-notice__text">
         Esta vista está optimizada para pantallas grandes. Accede desde una tableta o computadora

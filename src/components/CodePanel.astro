@@ -19,6 +19,8 @@ const { file, language, lines, active = false } = Astro.props;
 
 <article class="panel" data-panel={file} data-language={language} hidden={!active}>
   <div class="code">
-    {lines.map((line) => <div class="line" set:html={line} />)}
+    {lines.map((line) => (
+      <div class="line" set:html={line} />
+    ))}
   </div>
 </article>
