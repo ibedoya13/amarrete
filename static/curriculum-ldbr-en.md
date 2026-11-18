@@ -60,11 +60,11 @@ _Jul 2018 — May 2019_
 ## Technical Skills
 
 - **Languages:** TypeScript, JavaScript, Python, Java, Go, PHP
-- **Backend & APIs:** Node.js, Express, REST, microservices, API design, WebSockets
+- **Backend & APIs:** Node.js, Express, Hono, REST, microservices, API design, WebSockets
 - **Frontend:** Angular, React, Astro, HTML5, Sass/CSS
-- **Cloud & DevOps:** AWS, Cloudflare Workers, GCP, Docker, CI/CD, Git
+- **Cloud & DevOps:** AWS, Cloudflare Workers, D1, KV, GCP, Docker, CI/CD, Git
 - **Testing:** Vitest, Jest, Mocha, Jasmine/Karma, Japa — unit and integration testing (frontend and backend)
-- **Security:** OWASP Top 10, dependency analysis, vulnerability remediation
+- **Security:** OWASP Top 10, OAuth 2.0, CSRF protection, dependency analysis, vulnerability remediation
 - **Architecture:** scalable solutions, systems integration, legacy code refactoring
 
 ---
@@ -79,6 +79,15 @@ _Jul 2018 — May 2019_
 - Transport hardening: `Origin` validation on the upgrade (403 for disallowed origins), per-socket message limits, and custom state views that never reveal the opponent's fleet. SPA deployed on Cloudflare and backend packaged with Docker.
 
 **Stack:** Go · gorilla/websocket · Docker · Vue 3 · TypeScript · Vite · Vitest · Cloudflare
+
+### [kickabouts](https://kickabouts.amarrete.com/) — match results and team draws for eFootball
+
+- Hono 4 application with JSX-based SSR on Cloudflare Workers: results tracking for 1v1/2v2/2v3/3v3 matches and team draws for cooperative modes, with Cloudflare D1 as the database and KV for sessions.
+- Google OAuth 2.0 authentication with self-managed KV sessions with TTL, plus admin/player roles enforced by route middleware; user provisioning from the app or via script against the remote D1 database.
+- Unbiased random team draw: Fisher-Yates over `crypto.getRandomValues` with rejection sampling to avoid modulo bias, and a canonical signature of each draw so the previous distribution never repeats.
+- Hardening: `Origin`-based CSRF guard on mutating requests that fails closed, secrets kept out of versioned configuration, and tests running on the real Workers runtime (`@cloudflare/vitest-pool-workers`) with local D1 and KV.
+
+**Stack:** Hono · Cloudflare Workers · D1 · KV · Google OAuth 2.0 · TypeScript · Vitest · Biome
 
 ### [amarrete](https://personal.amarrete.com/) — personal site and interactive CV
 

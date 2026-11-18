@@ -85,11 +85,11 @@ const experiencia: JobPosition[] = [
 
 const habilidades: string[] = [
   "- Lenguajes: TypeScript, JavaScript, Python, Java, Go, PHP.",
-  "- Backend & APIs: Node.js, Express, REST, microservicios, diseño de APIs, WebSockets.",
+  "- Backend & APIs: Node.js, Express, Hono, REST, microservicios, diseño de APIs, WebSockets.",
   "- Frontend: Angular, React, Astro, HTML5, Sass/CSS.",
-  "- Cloud & DevOps: AWS, Cloudflare Workers, GCP, Docker, CI/CD, Git.",
+  "- Cloud & DevOps: AWS, Cloudflare Workers, D1, KV, GCP, Docker, CI/CD, Git.",
   "- Pruebas: Vitest, Jest, Mocha, Jasmine/Karma, Japa — pruebas unitarias y de integración (frontend y backend).",
-  "- Seguridad: OWASP Top 10, análisis de dependencias, remediación de vulnerabilidades.",
+  "- Seguridad: OWASP Top 10, OAuth 2.0, protección CSRF, análisis de dependencias, remediación de vulnerabilidades.",
   "- Arquitectura: soluciones escalables, integración de sistemas, refactorización de código legacy.",
 ];
 
@@ -118,6 +118,29 @@ const proyectos: Project[] = [
     url: "https://midway.amarrete.com",
   },
   {
+    nombre: "kickabouts",
+    descripcion: [
+      "Registro de resultados de partidos de eFootball (1v1, 2v2, 2v3, 3v3) y sorteo de equipos para modalidades coop.",
+      "Aplicación Hono 4 con SSR por JSX sobre Cloudflare Workers; datos en Cloudflare D1 y sesiones en KV.",
+      "Autenticación con Google OAuth 2.0, sesiones propias en KV con TTL y roles admin/player por middleware.",
+      "Sorteo sin sesgo: Fisher-Yates sobre crypto.getRandomValues con rejection sampling para evitar el sesgo de módulo.",
+      "Firma canónica de cada reparto para no repetir la distribución del sorteo anterior.",
+      "Guarda CSRF por Origin en peticiones mutantes que falla cerrado; secretos fuera de wrangler.jsonc.",
+      "Pruebas sobre el runtime real de Workers con vitest-pool-workers, D1 y KV locales.",
+    ],
+    stack: [
+      "Hono",
+      "Cloudflare Workers",
+      "D1",
+      "KV",
+      "Google OAuth 2.0",
+      "TypeScript",
+      "Vitest",
+      "Biome",
+    ],
+    url: "https://kickabouts.amarrete.com",
+  },
+  {
     nombre: "amarrete",
     descripcion: [
       "Sitio personal y CV interactivo: aplicación Astro con renderizado en servidor (SSR) desplegada en Cloudflare Workers.",
@@ -133,7 +156,7 @@ const proyectos: Project[] = [
 const contacto: ContactInfo = {
   email: "luisbedoya13@gmail.com",
   sitio: "personal.amarrete.com",
-  ubicacion: "Ciudad de Panamá, Panamá",
+  ubicacion: "Medellín, Colombia · Ciudad de Panamá, Panamá (disponible para trabajo remoto)",
   cv: "/api/download-cv",
   redes: {
     github: "https://github.com/ibedoya13",

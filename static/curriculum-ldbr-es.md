@@ -60,11 +60,11 @@ _jul. 2018 — may. 2019_
 ## Habilidades Técnicas
 
 - **Lenguajes:** TypeScript, JavaScript, Python, Java, Go, PHP
-- **Backend & APIs:** Node.js, Express, REST, microservicios, diseño de APIs, WebSockets
+- **Backend & APIs:** Node.js, Express, Hono, REST, microservicios, diseño de APIs, WebSockets
 - **Frontend:** Angular, React, Astro, HTML5, Sass/CSS
-- **Cloud & DevOps:** AWS, Cloudflare Workers, GCP, Docker, CI/CD, Git
+- **Cloud & DevOps:** AWS, Cloudflare Workers, D1, KV, GCP, Docker, CI/CD, Git
 - **Pruebas:** Vitest, Jest, Mocha, Jasmine/Karma, Japa — pruebas unitarias y de integración (frontend y backend)
-- **Seguridad:** OWASP Top 10, análisis de dependencias, remediación de vulnerabilidades
+- **Seguridad:** OWASP Top 10, OAuth 2.0, protección CSRF, análisis de dependencias, remediación de vulnerabilidades
 - **Arquitectura:** soluciones escalables, integración de sistemas, refactorización de código legacy
 
 ---
@@ -79,6 +79,15 @@ _jul. 2018 — may. 2019_
 - Endurecimiento del transporte: validación de `Origin` en el upgrade (403 a orígenes no permitidos), límite de mensajes por socket y vistas de estado personalizadas que no revelan la flota del rival. SPA desplegada en Cloudflare y backend empaquetado en Docker.
 
 **Stack:** Go · gorilla/websocket · Docker · Vue 3 · TypeScript · Vite · Vitest · Cloudflare
+
+### [kickabouts](https://kickabouts.amarrete.com/) — registro de partidos y sorteo de equipos para eFootball
+
+- Aplicación Hono 4 con SSR por JSX sobre Cloudflare Workers: registro de resultados 1v1/2v2/2v3/3v3 y sorteo de equipos para modalidades cooperativas, con Cloudflare D1 como base de datos y KV para las sesiones.
+- Autenticación con Google OAuth 2.0 y sesiones propias en KV con TTL, más roles admin/player protegidos por middleware de autorización; alta de usuarios desde la aplicación o vía script contra la D1 remota.
+- Sorteo de equipos aleatorio sin sesgo: Fisher-Yates sobre `crypto.getRandomValues` con rejection sampling para evitar el sesgo de módulo, y firma canónica de cada reparto para no repetir la distribución del sorteo anterior.
+- Endurecimiento: guarda CSRF por `Origin` en peticiones mutantes que falla cerrado, secretos fuera de la configuración versionada y pruebas sobre el runtime real de Workers (`@cloudflare/vitest-pool-workers`) con D1 y KV locales.
+
+**Stack:** Hono · Cloudflare Workers · D1 · KV · Google OAuth 2.0 · TypeScript · Vitest · Biome
 
 ### [amarrete](https://personal.amarrete.com/) — sitio personal y CV interactivo
 
